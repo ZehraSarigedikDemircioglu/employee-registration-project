@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @AllArgsConstructor
 public class EmployeeController {
 
-    private final EmployeeService employeeService;
+    private final EmployeeService employeeService; // I put @AllArgsConstructor to inject this field.
 
     @GetMapping("/register")
     public String createEmployee(Model model) {
@@ -30,7 +30,13 @@ public class EmployeeController {
     @PostMapping("/insert")
     public String insertEmployee(@ModelAttribute("employee") Employee employee) {
         employeeService.saveEmployee(employee);
-        return "employee/employee-list";
-       // return "redirect:/employee/register";
+        return "redirect:/employee/list"; // With redirect we are using endpoints
     }
+    @GetMapping("/list")
+    public String listEmployee(Model model) {
+        model.addAttribute("employeeList", employeeService.readAllEmployees());
+        return "employee/employee-list"; // Without redirect we are using html file paths
+    }
+
+
 }
