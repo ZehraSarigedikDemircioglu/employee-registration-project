@@ -21,6 +21,7 @@ public class Employee {
     //    @NotNull  -> @NotNull
     //    @NotEmpty -> @NotNull + @NotEmpty
     //    @NotBlank -> @NotNull + @NotEmpty + @NotBlank
+
     @NotBlank
     @Size(max = 12, min = 2)
     private String firstName;
